@@ -33,7 +33,8 @@ def get_vector_indicies(chunked_list):
 if __name__ == '__main__':
     indicies = []
     for rot in ROTATIONS:
-        indicies.extend(get_vector_indicies(sub_list(rotate(KEY_INDICIES, rot), SUB_KEY_SIZE))[::-1])
+        rotated_vector = rotate(KEY_INDICIES, rot)
+        indicies.extend(get_vector_indicies(sub_list(rotated_vector, SUB_KEY_SIZE))[::-1])
     indicies = sub_list(indicies, AMT_OF_KEYS)
     for i in indicies:
         print(i)
