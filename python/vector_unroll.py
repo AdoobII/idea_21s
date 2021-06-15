@@ -13,13 +13,14 @@ def rotate(list, amt):
     return list[-amt:] + list[:-amt]
 
 def sub_list(list, chunk_size):
-    slices_amt = int(len(list)/chunk_size)
+    list_length = len(list)
+    slices_amt = int(list_length/chunk_size)
     sliced_list = []
     for slice_index in range(slices_amt):
         start_index = slice_index*chunk_size
         end_index = (slice_index+1)*chunk_size
-        if end_index > (len(list) - 1):
-            end_index = len(list)
+        if end_index > (list_length - 1):
+            end_index = list_length
         sliced_list.append(list[start_index:end_index])
     return sliced_list
 
