@@ -1,24 +1,22 @@
-library ieee;
-use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
-entity mux2x1 is
-    port (  D0 : in STD_LOGIC_VECTOR (15 downto 0);
-            D1 : in STD_LOGIC_VECTOR (15 downto 0);
-            S : in STD_LOGIC;
-            O : out STD_LOGIC_VECTOR (15 downto 0));
-end mux2x1;
+ENTITY mux2x1 IS
+    PORT (
+        D0 : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+        D1 : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+        S : IN STD_LOGIC;
+        O : OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
+END mux2x1;
 
-architecture Behav of mux2x1 is
-begin
-    mux : process( D0,D1,S )
-    begin
-        case S is
-            when '0' =>
-                O <= D0;
-            when '1' =>
-                O <= D1;
-            when others =>
-                O <= "XXXXXXXXXXXXXXXX";
-        end case;
-    end process ; -- mux
-end Behav ; -- Behav
+ARCHITECTURE Behav OF mux2x1 IS
+BEGIN
+    mux : PROCESS (D0, D1, S)
+    BEGIN
+        IF S = '0' THEN
+            O <= D0;
+        ELSE
+            O <= D1;
+        END IF;
+    END PROCESS; -- mux
+END Behav; -- Behav

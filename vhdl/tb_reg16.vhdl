@@ -1,29 +1,30 @@
-library ieee;
-use ieee.std_logic_1164.ALL;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
-entity tb_reg16 is
-end tb_reg16;
+ENTITY tb_reg16 IS
+END tb_reg16;
 
-architecture behav of tb_reg16 is
+ARCHITECTURE behav OF tb_reg16 IS
     --component declaration
-    component reg16
-    port (  CLOCK : in STD_LOGIC;
-            ENABLE : in STD_LOGIC;
-            D : in STD_LOGIC_VECTOR (15 downto 0);
-            Q : out STD_LOGIC_VECTOR (15 downto 0));
+    COMPONENT reg16
+        PORT (
+            CLOCK : IN STD_LOGIC;
+            ENABLE : IN STD_LOGIC;
+            D : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+            Q : OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
     END COMPONENT;
 
     --input signals
-    signal D : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal CLOCK : STD_LOGIC := '0';
-    signal ENABLE : STD_LOGIC := '0';
+    SIGNAL D : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL CLOCK : STD_LOGIC := '0';
+    SIGNAL ENABLE : STD_LOGIC := '0';
 
     --output signal
-    signal Q : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    SIGNAL Q : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
 
-begin
-    --instantiation of mulop
-    uut: reg16 port map 
+BEGIN
+    --instantiation of REG16
+    uut : reg16 PORT MAP
     (
         D => D,
         CLOCK => CLOCK,
@@ -31,22 +32,22 @@ begin
         Q => Q
     );
 
-    clock_proc : process
-    begin
-        CLOCK <= not CLOCK;
-        wait for 10 ns;
-    end process ; -- clock_proc
+    clock_proc : PROCESS
+    BEGIN
+        CLOCK <= NOT CLOCK;
+        WAIT FOR 10 ns;
+    END PROCESS; -- clock_proc
 
-    stim_proc: process
-    begin
-        wait for 100 ns;
+    stim_proc : PROCESS
+    BEGIN
+        WAIT FOR 100 ns;
         D <= x"AAAA";
-        wait for 50 ns;
+        WAIT FOR 50 ns;
         ENABLE <= '1';
-        wait for 52 ns;
+        WAIT FOR 52 ns;
         D <= x"6969";
-        wait for 100 ns;
-        assert false report "Reached end of test";
-        wait;
-    end process;
-end behav;
+        WAIT FOR 100 ns;
+        ASSERT false REPORT "Reached end of test";
+        WAIT;
+    END PROCESS;
+END behav;

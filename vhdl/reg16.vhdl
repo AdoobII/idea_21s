@@ -1,21 +1,22 @@
-library ieee;
-use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
-entity reg16 is
-    port (  CLOCK : in STD_LOGIC;
-            ENABLE : in STD_LOGIC;
-            D : in STD_LOGIC_VECTOR (15 downto 0);
-            Q : out STD_LOGIC_VECTOR (15 downto 0));
-end reg16;
+ENTITY reg16 IS
+    PORT (
+        CLOCK : IN STD_LOGIC;
+        ENABLE : IN STD_LOGIC;
+        D : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+        Q : OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
+END reg16;
 
-architecture Behav of reg16 is
-begin
-    reg : process( CLOCK )
-    begin
-        if (CLOCK = '1' and CLOCK'EVENT) then
-            if (ENABLE = '1') then
+ARCHITECTURE Behav OF reg16 IS
+BEGIN
+    reg : PROCESS (CLOCK)
+    BEGIN
+        IF (CLOCK = '1' AND CLOCK'EVENT) THEN
+            IF (ENABLE = '1') THEN
                 Q <= D;
-            end if;
-        end if;
-    end process ; -- reg
-end Behav ; -- Behav
+            END IF;
+        END IF;
+    END PROCESS; -- reg
+END Behav; -- Behav
