@@ -16,19 +16,19 @@ ENTITY control IS
 END control;
 
 ARCHITECTURE Behavioral OF control IS
-    SIGNAL counter : unsigned (2 DOWNTO 0) := (OTHERS => '1');
+    SIGNAL counter : unsigned (1 DOWNTO 0) := (OTHERS => '1');
 BEGIN
     control_proc : PROCESS (CLK)
     BEGIN
         IF CLK = '1' AND CLK'event THEN
-            IF INIT = '1' AND counter = "111" THEN
-                counter <= "000";
-            ELSIF counter /= "111" THEN
+            IF INIT = '1' AND counter = "11" THEN
+                counter <= "00";
+            ELSIF counter /= "11" THEN
                 counter <= counter + 1;
             END IF;
             CASE(counter) IS
 
-                WHEN "000" =>
+                WHEN "00" =>
                 EN125 <= '1';
                 EN346 <= '0';
                 EN78 <= '0';
@@ -39,18 +39,18 @@ BEGIN
                 ELSE
                     S_T <= "00";
                 END IF;
-                WHEN "001" =>
-                EN125 <= '0';
-                EN346 <= '0';
-                EN78 <= '0';
-                RESULT <= '0';
-                S <= "00";
-                IF TRAFO = '1' THEN
-                    S_T <= "01";
-                ELSE
-                    S_T <= "00";
-                END IF;
-                WHEN "010" =>
+                -- WHEN "001" =>
+                -- EN125 <= '0';
+                -- EN346 <= '0';
+                -- EN78 <= '0';
+                -- RESULT <= '0';
+                -- S <= "00";
+                -- IF TRAFO = '1' THEN
+                --     S_T <= "01";
+                -- ELSE
+                --     S_T <= "00";
+                -- END IF;
+                WHEN "01" =>
                 EN125 <= '0';
                 EN346 <= '1';
                 EN78 <= '0';
@@ -61,40 +61,7 @@ BEGIN
                 ELSE
                     S_T <= "01";
                 END IF;
-                WHEN "011" =>
-                EN125 <= '0';
-                EN346 <= '0';
-                EN78 <= '0';
-                RESULT <= '0';
-                S <= "01";
-                IF TRAFO = '1' THEN
-                    S_T <= "00";
-                    counter <= "110";
-                ELSE
-                    S_T <= "01";
-                END IF;
-                WHEN "100" =>
-                EN125 <= '0';
-                EN346 <= '0';
-                EN78 <= '1';
-                RESULT <= '0';
-                S <= "10";
-                IF TRAFO = '1' THEN
-                    S_T <= "11";
-                ELSE
-                    S_T <= "10";
-                END IF;
-                WHEN "101" =>
-                EN125 <= '0';
-                EN346 <= '0';
-                EN78 <= '0';
-                S <= "10";
-                IF TRAFO = '1' THEN
-                    S_T <= "11";
-                ELSE
-                    S_T <= "10";
-                END IF;
-                WHEN "110" =>
+                WHEN "10" =>
                 EN125 <= '0';
                 EN346 <= '0';
                 EN78 <= '0';
@@ -102,10 +69,43 @@ BEGIN
                 S <= "11";
                 IF TRAFO = '1' THEN
                     S_T <= "10";
+                    counter <= "11";
                 ELSE
-                    S_T <= "11";
+                    S_T <= "01";
                 END IF;
-                WHEN "111" =>
+                -- WHEN "100" =>
+                -- EN125 <= '0';
+                -- EN346 <= '0';
+                -- EN78 <= '1';
+                -- RESULT <= '0';
+                -- S <= "10";
+                -- IF TRAFO = '1' THEN
+                --     S_T <= "11";
+                -- ELSE
+                --     S_T <= "10";
+                -- END IF;
+                -- WHEN "101" =>
+                -- EN125 <= '0';
+                -- EN346 <= '0';
+                -- EN78 <= '0';
+                -- S <= "10";
+                -- IF TRAFO = '1' THEN
+                --     S_T <= "11";
+                -- ELSE
+                --     S_T <= "10";
+                -- END IF;
+                -- WHEN "110" =>
+                -- EN125 <= '0';
+                -- EN346 <= '0';
+                -- EN78 <= '0';
+                -- RESULT <= '1';
+                -- S <= "11";
+                -- IF TRAFO = '1' THEN
+                --     S_T <= "10";
+                -- ELSE
+                --     S_T <= "11";
+                -- END IF;
+                WHEN "11" =>
                 EN125 <= '0';
                 EN346 <= '0';
                 EN78 <= '0';
@@ -116,7 +116,7 @@ BEGIN
                 ELSE
                     S_T <= "11";
                 END IF;
-                WHEN OTHERS => counter <= "111";
+                WHEN OTHERS => counter <= "11";
             END CASE;
 
             -- S <= select_line;
