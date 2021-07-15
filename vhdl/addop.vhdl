@@ -1,47 +1,19 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    20:03:44 05/09/2021 
--- Design Name: 
--- Module Name:    addop - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
---
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
---
-----------------------------------------------------------------------------------
-library IEEE;
+LIBRARY IEEE;
 USE ieee.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+ENTITY addop IS
+	PORT (
+		I_1 : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+		I_2 : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+		O_1 : OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
+END addop;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+ARCHITECTURE Behavioral OF addop IS
+BEGIN
+	ADDOP_proc : PROCESS (I_1, I_2)
+	BEGIN
+		O_1 <= STD_LOGIC_VECTOR("+"(unsigned(I_1), unsigned(I_2))(15 DOWNTO 0));
+	END PROCESS ADDOP_proc;
 
-entity addop is
-    Port ( I_1 : in  STD_LOGIC_VECTOR (15 downto 0);
-           I_2 : in  STD_LOGIC_VECTOR (15 downto 0);
-           O_1 : out  STD_LOGIC_VECTOR (15 downto 0));
-end addop;
-
-architecture Behavioral of addop is
-begin
-	ADDOP_proc: process(I_1, I_2)
-	begin
-		O_1 <= std_logic_vector("+"(unsigned(I_1), unsigned(I_2))(15 downto 0));
-	end process ADDOP_proc;
-
-end Behavioral;
-
+END Behavioral;
