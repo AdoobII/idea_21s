@@ -9,34 +9,43 @@ ARCHITECTURE behav OF tb_control IS
     COMPONENT control
         PORT (
             CLK : IN STD_LOGIC;
-            START : IN STD_LOGIC;
-            READY : OUT STD_LOGIC;
-            S : OUT STD_LOGIC;
-            EN : OUT STD_LOGIC;
-            ROUND : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
-        );
+            INIT : IN STD_LOGIC;
+            TRAFO : IN STD_LOGIC;
+            EN125 : OUT STD_LOGIC;
+            EN346 : OUT STD_LOGIC;
+            EN78 : OUT STD_LOGIC;
+            RESULT : OUT STD_LOGIC;
+            S : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+            S_T : OUT STD_LOGIC_VECTOR(1 DOWNTO 0));
     END COMPONENT;
 
     --input signals
-    SIGNAL START : STD_LOGIC := '0';
+    SIGNAL INIT : STD_LOGIC := '0';
     SIGNAL CLK : STD_LOGIC := '0';
+    SIGNAL TRAFO : STD_LOGIC := '0';
 
-    --output signal
-    SIGNAL READY : STD_LOGIC;
-    SIGNAL S : STD_LOGIC;
-    SIGNAL EN : STD_LOGIC;
-    SIGNAL ROUND : STD_LOGIC_VECTOR (3 DOWNTO 0);
+    --output signals
+    SIGNAL EN125 : STD_LOGIC;
+    SIGNAL EN346 : STD_LOGIC;
+    SIGNAL EN78 : STD_LOGIC;
+    SIGNAL RESULT : STD_LOGIC;
+
+    SIGNAL S : STD_LOGIC_VECTOR (1 DOWNTO 0);
+    SIGNAL S_T : STD_LOGIC_VECTOR (1 DOWNTO 0);
 
 BEGIN
     --instantiation of mulop
     uut : control PORT MAP
     (
-        START => START,
+        INIT => INIT,
         CLK => CLK,
-        READY => READY,
-        S => S,
-        EN => EN,
-        ROUND => ROUND
+        TRAFO => TRAFO,
+        EN125 => EN125,
+        EN346 => EN346,
+        EN78 => EN78,
+        RESULT => RESULT,
+        S_T => S_T,
+        S => S
     );
 
     CLK_proc : PROCESS
@@ -48,18 +57,23 @@ BEGIN
     stim_proc : PROCESS
     BEGIN
         WAIT FOR 100 ns;
-        start <= '1';
-        WAIT FOR 20 ns;
-        start <= '0';
-        WAIT FOR 300 ns;
-        start <= '1';
-        WAIT FOR 100 ns;
-        start <= '0';
-        WAIT FOR 100 ns;
-        start <= '1';
+        INIT <= '1';
         WAIT FOR 5 ns;
-        start <= '0';
-        WAIT FOR 100 ns;
+        INIT <= '0';
+        WAIT FOR 400 ns;
+        INIT <= '1';
+        WAIT FOR 20 ns;
+        INIT <= '0';
+        WAIT FOR 50 ns;
+        INIT <= '1';
+        WAIT FOR 20 ns;
+        INIT <= '0';
+        WAIT FOR 400 ns;
+        TRAFO <= '1';
+        INIT <= '1';
+        WAIT FOR 20 ns;
+        INIT <= '0';
+        WAIT FOR 400 ns;
         ASSERT false REPORT "Reached end of test";
         WAIT;
     END PROCESS;
