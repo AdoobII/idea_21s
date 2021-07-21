@@ -1,0 +1,52 @@
+$date
+  Wed May 19 00:12:09 2021
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$scope module standard $end
+$upscope $end
+$scope module std_logic_1164 $end
+$upscope $end
+$scope module numeric_std $end
+$upscope $end
+$scope module tb_xorop $end
+$var reg 16 ! i_1[15:0] $end
+$var reg 16 " i_2[15:0] $end
+$var reg 16 # o_1[15:0] $end
+$scope module uut $end
+$var reg 16 $ i_1[15:0] $end
+$var reg 16 % i_2[15:0] $end
+$var reg 16 & o_1[15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b0000000000000000 !
+b0000000000000000 "
+b0000000000000000 #
+b0000000000000000 $
+b0000000000000000 %
+b0000000000000000 &
+#100000000
+#110000000
+#210000000
+b0001001000110100 !
+b0001001000110100 #
+b0001001000110100 $
+b0001001000110100 &
+#220000000
+b0101011001111000 "
+b0100010001001100 #
+b0101011001111000 %
+b0100010001001100 &
+#320000000
+#330000000
+b0000000000000000 "
+b0001001000110100 #
+b0000000000000000 %
+b0001001000110100 &
+#430000000

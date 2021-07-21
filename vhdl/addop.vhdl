@@ -1,0 +1,19 @@
+LIBRARY IEEE;
+USE ieee.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+
+ENTITY addop IS
+	PORT (
+		I_1 : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+		I_2 : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+		O_1 : OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
+END addop;
+
+ARCHITECTURE Behavioral OF addop IS
+BEGIN
+	ADDOP_proc : PROCESS (I_1, I_2)
+	BEGIN
+		O_1 <= STD_LOGIC_VECTOR("+"(unsigned(I_1), unsigned(I_2))(15 DOWNTO 0));
+	END PROCESS ADDOP_proc;
+
+END Behavioral;
